@@ -6,6 +6,7 @@ import {
   REGISTRO_ERROR,
   OBTENER_USUARIO,
   LOGIN_EXITOSO,
+  ACTUALIZAR_USUARIO,
   OBTENER_TOKEN,
   LOGIN_ERROR,
   CERRAR_SESION,
@@ -52,6 +53,7 @@ export default function(state = initialState, action) {
       }
 
     case OBTENER_USUARIO:
+    case ACTUALIZAR_USUARIO:
       return{
         ...state,
         user: action.payload

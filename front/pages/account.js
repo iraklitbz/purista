@@ -1,46 +1,49 @@
 import BasicLayout from '../layouts/BasicLayout'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {useDispatch } from 'react-redux';
-import router, { useRouter } from 'next/router';
+import router from 'next/router';
 import { getMeApi, signOut } from '../actions/userActions';
 import { useSelector } from "react-redux";
-import { signIn, useSession } from 'next-auth/client'
+import ChangeNameForm from '../components/Account/ChangeNameForm';
+import ChangePasswordForm from '../components/Account/ChangePasswordForm';
 
 
 export default function Account() {
   const auth = useSelector(state => state.usuario.token);
   const user = useSelector(state => state.usuario.user);
-  const [session, loading] = useSession();
   const dispatch = useDispatch();
   const cerrarSesion = () => {
     dispatch(signOut())
   }
 
 
+  useEffect(() => {
+    dispatch(getMeApi(cerrarSesion));
+  }, [auth]);
 
+  if (user === null) return (<div>Login</div>);
 
-
+  if (!auth && !user) {
+    router.replace("/");
+    return null;
+  }
   
 
-  useEffect(() =>{
-    const fetchData = async () => {
-      await dispatch(getMeApi(cerrarSesion))
-    }
-    fetchData()
 
-  },[auth])
+    return (
+      <BasicLayout>
+        <h1>Estamos en la account</h1>
+        <ChangeNameForm 
+          user={user}
+          cerrarSesion={cerrarSesion}
+        />
+        <ChangePasswordForm 
+          user={user}
+          cerrarSesion={cerrarSesion}
+        />
+      </BasicLayout>
+    )
+   
 
-
-  // When rendering client side don't display anything until loading is complete
-  if (!user) {
-    return router.push('/')
-  }
-
-
-  return (
-    <BasicLayout>
-      <h1>Estamos en la account</h1>
-    </BasicLayout>
- 
-  )
+  
 }

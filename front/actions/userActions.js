@@ -7,6 +7,7 @@ import {
   REGISTRO_EXITOSO, 
   REGISTRO_ERROR,
   OBTENER_USUARIO,
+  ACTUALIZAR_USUARIO,
   LOGIN_EXITOSO,
   OBTENER_TOKEN,
   LOGIN_ERROR,
@@ -32,7 +33,10 @@ export function registrarUsuario(usuario) {
       }
       const response = await fetch(url, params)
       const result = await response.json();
-      dispatch(setUser(result))
+      dispatch({
+        type: REGISTRO_EXITOSO,
+        payload: result
+      })
       // Alerta
       Swal.fire(
         'Correcto', 
@@ -54,16 +58,93 @@ export function registrarUsuario(usuario) {
    
   }
 }
+//actualizar usuario
+export function actualizarUsuario(id, data, logout) {
+  console.log(id)
+  return async (dispatch) => {
+    try {
+      const url = `${BASE_PATH}/users/${id}`
+      const params = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      }
+      const response = await fetch(url, params, logout)
+      const result = await response.json();
+      dispatch({
+        type: ACTUALIZAR_USUARIO,
+        payload: result
+      })
+      // Alerta
+      Swal.fire(
+        'Correcto', 
+        'Te has registrado correctamente',
+        'success'
+    );
+     
+      
+    } catch (error) {
+      console.log(error);
+      dispatch( {
+        type: REGISTRO_ERROR,
+        payload: true
+      } );
+       // alerta de error
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un error',
+        text: 'Hubo un error, intenta de nuevo'
+    })
+    }
+   
+  }
+}
 
-const setUser = (result) => ({
-  type: REGISTRO_EXITOSO,
-  payload: result
-})
-
-const registrarUsuarioError = (estado) => ({
-  type: REGISTRO_ERROR,
-  payload: estado
-})
+//actualizar password
+export function actualizarPass(id, password, logout) {
+  console.log(id)
+  return async (dispatch) => {
+    try {
+      const url = `${BASE_PATH}/users/${id}`
+      const params = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({password})
+      }
+      const response = await fetch(url, params, logout)
+      const result = await response.json();
+      dispatch({
+        type: ACTUALIZAR_USUARIO,
+        payload: result
+      })
+      // Alerta
+      Swal.fire(
+        'Correcto', 
+        'Te has registrado correctamente',
+        'success'
+    );
+     
+      
+    } catch (error) {
+      console.log(error);
+      dispatch( {
+        type: REGISTRO_ERROR,
+        payload: true
+      } );
+       // alerta de error
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un error',
+        text: 'Hubo un error, intenta de nuevo'
+    })
+    }
+   
+  }
+}
 
 // login usuario
 export function loginUsuario(usuario) {
@@ -87,6 +168,9 @@ export function loginUsuario(usuario) {
         type: LOGIN_EXITOSO,
         token: result.jwt
       })
+      dispatch({
+        type: OBTENER_USUARIO,
+       })
 
     } catch (error) {
       console.log(error);
@@ -114,7 +198,7 @@ export const loadUser = () => {
     const token = getToken();
     if (token) {
       dispatch({
-        type: "OBTENER_TOKEN",
+        type: OBTENER_TOKEN,
         token,
       });
     } else return null;
@@ -153,7 +237,7 @@ export const getMeApi = (signOut) => {
     try {
       const url = `${BASE_PATH}/users/me`;
       const result = await authFetch(url, null, signOut);
-      console.log('desde get api',result)
+     
      if(result) {
        dispatch({
         type: "OBTENER_USUARIO",

@@ -18,8 +18,12 @@ const Navbar = () => {
     dispatch(signOut())
   }
 
-  useEffect(() => {
-    dispatch(getMeApi(cerrarSesion));
+  useEffect(() =>{
+    const fetchData = async () => {
+       await dispatch(getMeApi(cerrarSesion));
+    }
+    fetchData()
+
   },[auth])
   
   return ( 
