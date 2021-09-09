@@ -153,6 +153,7 @@ export const getMeApi = (signOut) => {
     try {
       const url = `${BASE_PATH}/users/me`;
       const result = await authFetch(url, null, signOut);
+      console.log('desde get api',result)
      if(result) {
        dispatch({
         type: "OBTENER_USUARIO",

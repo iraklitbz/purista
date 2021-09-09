@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { showModal } from '../../../actions/modalActions'
 import { useSelector } from "react-redux";
@@ -8,8 +8,6 @@ import Link from 'next/link'
 const Navbar = () => {
   const auth = useSelector(state => state.usuario.token);
   const user = useSelector(state => state.usuario.user);
-
-  console.log(user)
 
   const dispatch = useDispatch();
 
