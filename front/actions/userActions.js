@@ -126,7 +126,7 @@ export function actualizarPass(id, password, logout) {
         'Correcto', 
         'Te has registrado correctamente',
         'success'
-    );
+      );
      
       
     } catch (error) {

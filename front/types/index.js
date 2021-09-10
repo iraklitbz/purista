@@ -15,4 +15,14 @@ export const RESET_PASSWORD = 'RESET_PASSWORD';
 
 
 
-/*AUTH*/
+/*PRODUCTOS*/
+export const ULTIMOS_PRODUCTOS = 'ULTIMOS_PRODUCTOS';
+export const PRODUCTO_BY_URL = 'PRODUCTO_BY_URL';
+export const PRODUCTO_BY_ID = 'PRODUCTO_BY_ID';
+
+//CART
+export const ADD_PRODUCT = 'ADD_PRODUCT';
+export const GET_PRODUCT = 'GET_PRODUCT';
+export const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
+export const REMOVE_ALL_PRODUCT = 'REMOVE_ALL_PRODUCT';
+   
