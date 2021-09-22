@@ -59,8 +59,23 @@ export function getProductCart() {
 }
 
 //  remove cart from localstorage 
-export function removeProductCart() {
-  return async (dispatch) => {}
+export function removeProductCart(product) {
+  return async (dispatch) => {
+    const cart = getProductCart();
+    remove(cart, (element) => {
+      return element === product;
+    })
+
+    if(size(cart) > 0) {
+      localStorage.setItem(CART, cart);
+    } else {
+      localStorage.removeItem(CART);
+    }
+    dispatch({
+      type: REMOVE_PRODUCT,
+      payload: size(cart)
+    })
+  }
 }
 
 // 

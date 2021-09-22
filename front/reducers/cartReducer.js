@@ -30,6 +30,14 @@ export default function(state = initialState, action) {
         reloadCart: false
       }
 
+    case REMOVE_PRODUCT:
+      return {
+        ...state,
+        productCart: action.payload,
+        reloadCart: true
+      }
+    
+
     
     default:
       return state;

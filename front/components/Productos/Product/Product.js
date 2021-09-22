@@ -5,7 +5,6 @@ import { addProductCart } from "../../../actions/cartAction";
 const Product = ({producto}) => {
    const dispatch = useDispatch();
    const {title, price, image, summary, table, _id} = producto;
-   console.log(producto)
 
    const addProduct = (product) => {
        dispatch(addProductCart(product));

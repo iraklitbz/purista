@@ -17,7 +17,6 @@ const Cart = () => {
 
   const getProducts = () => {
     const cart = localStorage.getItem(CART);
-    console.log(cart)
     if(!cart) {
       setProducts(null)
     } else {
