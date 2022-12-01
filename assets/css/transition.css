@@ -1,0 +1,41 @@
+/* Set global transitions that are used in more than one place. */
+.fade-enter-active,
+.fade-leave-active {
+    @apply transition-opacity duration-300;
+}
+.fade-enter,
+.fade-leave-to {
+    @apply opacity-0;
+}
+.fade-down-enter-active,
+.fade-down-leave-active {
+    @apply transition-all duration-300;
+}
+.fade-down-enter,
+.fade-down-leave-to {
+    @apply opacity-0 -translate-y-1;
+}
+.fade-up-enter-active,
+.fade-up-leave-active {
+    @apply transition-all duration-300;
+}
+.fade-up-enter,
+.fade-up-leave-to {
+    @apply opacity-0 -translate-y-4;
+}
+.fade-left-enter-active,
+.fade-left-leave-active {
+    @apply transition-all duration-300;
+}
+.fade-left-enter,
+.fade-left-leave-to {
+    @apply opacity-0 -translate-x-4;
+}
+.fade-right-enter-active,
+.fade-right-leave-active {
+    @apply transition-all duration-300;
+}
+.fade-right-enter,
+.fade-right-leave-to {
+    @apply opacity-0 translate-x-4;
+}
