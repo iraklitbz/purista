@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "export NODE_OPTIONS=\"--openssl-legacy-provider --no-experimental-fetch\" && nuxt",
-    "build": "export NODE_OPTIONS=\"--openssl-legacy-provider --no-experimental-fetch\" && nuxt build",
+    "dev": "nuxt",
+    "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "export NODE_OPTIONS=\"--openssl-legacy-provider --no-experimental-fetch\" && nuxt generate --fail-on-error"
+    "generate": "nuxt generate"
   },
   "dependencies": {
     "codyhouse-framework": "^3.0.8",
