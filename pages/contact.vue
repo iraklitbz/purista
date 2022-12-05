@@ -32,6 +32,34 @@
                                 referrerpolicy="no-referrer-when-downgrade">
                             </iframe>
                         </div>
+                        
+                    </div>
+                    <div class="mt-20 grid grid-cols-12 gap-8 lg:gap-12">
+                        <div class="col-span-12 lg:col-span-5">
+                            <dl class="details-list details-list--rows">
+                                <div 
+                                    v-for="(item, index) in $t('contact.list2')"
+                                    :key="index" 
+                                    class="details-list__item py-5 text-base lg:py-8 lg:flex lg:justify-between"
+                                >
+                                    <dt class="font-bold mb-1.5 lg:mb-2 lg:mb-0">{{item.q}}</dt>
+                                    <dd class="leading-snug lg:text-right">
+                                        {{item.a}}
+                                    </dd>
+                                </div>
+                            </dl>
+                        </div>
+
+                        <div class="wrapper col-span-12 lg:col-span-7">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2979.427140752105!2d44.79699431536675!3d41.689713879237665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40440cf2726b4a91%3A0x105404e163805314!2s29%20Lado%20Asatiani%20St%2C%20T&#39;bilisi%2C%20Georgia!5e0!3m2!1ses!2ses!4v1670273889760!5m2!1ses!2ses" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                        
                     </div>
             </section>
             

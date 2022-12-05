@@ -57,7 +57,7 @@
             <div class="mt-10 text-lg text-contrast-medium" v-html="$t('service.subtitle2')"></div>
             <div class="mt-10 text-center">
               <p class="font-bold">{{ $t('service.title3') }}</p>
-              <nuxt-link class="btn-fx-1 mt-5" to="/store">
+              <nuxt-link class="btn-fx-1 mt-5" to="/products">
                 <div class="btn-fx-1__inner py-2 lg:py-3 px-3 lg:px-5">
                   <span class="font-bold text-xl">{{ $t('service.button') }}</span>
                   <div class="btn-fx-1__icon-wrapper" aria-hidden="true">
