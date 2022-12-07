@@ -5,22 +5,18 @@
             "url": "/"
         },
         "nav2": {
-            "title": "სერვისები",
-            "url": "/services"
-        },
-        "nav3": {
             "title": "ჩვენს შესახებ",
             "url": "/about-us"
         },
-        "nav4": {
+        "nav3": {
             "title": "პროდუქტები",
             "url": "/products"
         },
-        "nav5": {
+        "nav4": {
             "title": "კითხვა – პასუხი",
             "url": "/faqs"
         },
-        "nav6": {
+        "nav5": {
             "title": "კონტაქტი",
             "url": "/contact"
         }

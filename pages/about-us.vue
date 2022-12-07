@@ -15,9 +15,9 @@
             <h2 class="text-2xl mt-10">{{ $t('about.title2') }}</h2>
             <p class="mt-6 text-lg text-contrast-medium">{{$t('about.subtitle2')}}</p>
         </div>
-        <div class="max-w-6xl mx-auto py-10 px-5 md:px-0">
+        <!-- <div class="max-w-6xl mx-auto py-10 px-5 md:px-0">
             <img class="w-full mx-auto" :src="require(`~/assets/images/10.jpeg`)" />
-        </div>
+        </div> -->
         <div class="max-w-4xl mx-auto py-10 px-5 parrafBox">
             <h2 class="text-2xl">{{ $t('about.title3') }}</h2>
             <div class="mt-6 text-lg text-contrast-medium" v-html="$t('about.subtitle3')"></div>

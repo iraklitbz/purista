@@ -5,22 +5,18 @@
             "url": "/en"
         },
         "nav2": {
-            "title": "Services",
-            "url": "/en/services"
-        },
-        "nav3": {
             "title": "About us",
             "url": "/en/about-us"
         },
-        "nav4": {
+        "nav3": {
             "title": "products",
             "url": "/en/products"
         },
-        "nav5": {
+        "nav4": {
             "title": "FAQs",
             "url": "/en/faqs"
         },
-        "nav6": {
+        "nav5": {
             "title": "Contact",
             "url": "/en/contact"
         }
