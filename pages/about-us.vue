@@ -23,7 +23,7 @@
             <div class="mt-6 text-lg text-contrast-medium" v-html="$t('about.subtitle3')"></div>
         </div>
         <div class="text-center mb-10">
-            <nuxt-link class="btn-fx-1" to="/products">
+            <nuxt-link class="btn-fx-1" to="/contact">
                 <div class="btn-fx-1__inner py-2 lg:py-3 px-3 lg:px-5">
                     <span class="font-bold text-xl">{{ $t('about.button') }}</span>
                     <div class="btn-fx-1__icon-wrapper" aria-hidden="true">
