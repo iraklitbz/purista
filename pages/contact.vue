@@ -22,11 +22,11 @@
                         </dd>
                     </div>
                 
-                    <div 
+                    <div @click="handleMaps('option2')"
                         class="details-list__item py-5 cursor-pointer hover:bg-contrast-low hover:bg-opacity-20 lg:py-8 lg:px-8 lg:text-center col-span-12 lg:col-span-6"
                         :class="option2 ? 'bg-contrast-low bg-opacity-10' : ''"
                     >
-                        <dt @click="handleMaps('option2')" class="text-primary  font-bold mb-1.5 lg:mb-2">მ. ასათიანის 29ბ</dt>
+                        <dt class="text-primary  font-bold mb-1.5 lg:mb-2">მ. ასათიანის 29ბ</dt>
                         <dd class="leading-snug">
                             თბილისი <br>08:00 დან 21:00 მდე<br>+591 050 084<br>info@purista.ge
                         </dd>
