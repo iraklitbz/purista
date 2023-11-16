@@ -1,0 +1,10 @@
+/* Import the tailwind base */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+    /* Set global styles */
+    html {
+        scroll-behavior: smooth;
+    }
+}

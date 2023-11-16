@@ -1,30 +1,35 @@
 {
   "name": "purista",
-  "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "nuxt",
     "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate"
-  },
-  "dependencies": {
-    "codyhouse-framework": "^3.0.8",
-    "core-js": "^3.25.3",
-    "nuxt": "^2.15.8",
-    "postcss": "^8.4.17",
-    "vue": "^2.7.10",
-    "nuxt-i18n": "6.28.1",
-    "vue-server-renderer": "^2.7.10",
-    "vue-template-compiler": "^2.7.10",
-    "nuxt-video-player": "^1.0.17"
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^5.3.3",
-    "postcss": "^8.4.17",
-    "sass": "1.54.9",
-    "sass-loader": "10.3.1",
-    "svg-inline-loader": "0.8.2",
-    "svgo-loader": "2.2.2"
+    "@nuxt/devtools": "latest",
+    "@nuxt/types": "^2.17.0",
+    "@nuxtjs/apollo": "5.0.0-alpha.8",
+    "@nuxtjs/fontaine": "^0.4.0",
+    "@nuxtjs/google-fonts": "^3.0.1",
+    "@nuxtjs/i18n": "8.0.0-beta.13",
+    "@nuxtjs/tailwindcss": "^6.7.2",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@types/node": "^18.16.18",
+    "codyhouse-framework": "^3.0.8",
+    "nuxt": "^3.8.1",
+    "sass": "^1.63.4",
+    "vue": "^3.3.8",
+    "vue-router": "^4.2.5"
+  },
+  "dependencies": {
+    "@nuxt/content": "^2.9.0",
+    "@nuxt/image": "^1.0.0",
+    "markdown-it": "^13.0.2",
+    "nuxt-icons": "^3.1.0",
+    "plyr": "^3.7.2"
   }
 }
