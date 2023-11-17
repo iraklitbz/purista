@@ -66,6 +66,4 @@
       variables: { locale: locale.value }
     })
     const products = ref(data.value.products.data)
-    console.log(products)
 </script>
-  

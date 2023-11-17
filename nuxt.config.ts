@@ -56,7 +56,7 @@ export default defineNuxtConfig({
     },
     runtimeConfig: {
       public: {
-        GQL_HOST: 'http://puristaback.com:1337/graphql'
+        GQL_HOST: 'https://puristaback.com/graphql'
       }
     }
 })
