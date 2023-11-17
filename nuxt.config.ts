@@ -8,7 +8,7 @@ export default defineNuxtConfig({
         '@nuxtjs/fontaine',
         '@nuxtjs/i18n',
         '@nuxt/image',
-        '@nuxtjs/apollo',
+        'nuxt-graphql-client',
         '@nuxt/content',
         ['@nuxtjs/google-fonts', {
             families: {
@@ -19,13 +19,6 @@ export default defineNuxtConfig({
             }
           }]
     ],
-    apollo: {
-      clients: {
-        default: {
-          httpEndpoint: 'http://puristaback.com:1337/graphql'
-        }
-      },
-    },
     image: {
       provider: 'cloudinary',
       cloudinary: {
@@ -60,5 +53,10 @@ export default defineNuxtConfig({
     },
     build: {
       transpile: ['tslib']
+    },
+    runtimeConfig: {
+      public: {
+        GQL_HOST: 'http://puristaback.com:1337/graphql'
+      }
     }
 })

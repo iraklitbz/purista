@@ -5,6 +5,7 @@ import 'node:http';
 import 'node:https';
 import 'fs';
 import 'path';
+import 'graphql-request';
 import 'node:fs';
 import 'node:url';
 import 'unified';

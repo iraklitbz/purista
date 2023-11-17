@@ -46,27 +46,9 @@
   const { t } = useI18n()
   const localePath = useLocalePath()
   const { locale } = useI18n()
-  const query = gql`
-      query GetProductsEdges($locale: I18NLocaleCode!) {
-        products(locale: $locale, pagination: { limit: 4 }) {
-          data {
-            id
-            attributes {
-              title
-              price
-              slug
-              feature {
-                data {
-                  attributes {
-                    formats
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-  `
-  const { data } = await useAsyncQuery(query, { locale: locale.value } )
+  const { data } = await useAsyncGql({
+    operation: 'outstanding',
+    variables: { locale: locale.value }
+  });
   const products = ref(data.value.products.data)
 </script>

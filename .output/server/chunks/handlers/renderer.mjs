@@ -119,7 +119,7 @@ const getEntryIds = () => getClientManifest().then((r) => Object.values(r).filte
     r2._globalCSS
   )
 ).map((r2) => r2.src));
-const getServerEntry = () => import('../app/server.mjs').then((r) => r.default || r);
+const getServerEntry = () => import('../app/server.mjs').then(function (n) { return n.s; }).then((r) => r.default || r);
 const getSSRStyles = lazyCachedFunction(() => import('../app/styles.mjs').then((r) => r.default || r));
 const getSSRRenderer = lazyCachedFunction(async () => {
   const manifest = await getClientManifest();

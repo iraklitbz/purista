@@ -1,0 +1,10 @@
+query faqs($locale: I18NLocaleCode!) {
+    faqs(locale: $locale) {
+        data {
+            attributes {
+                question
+                answer
+            }
+        }
+    }
+}

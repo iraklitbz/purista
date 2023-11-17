@@ -3,6 +3,7 @@ import 'node:https';
 export { M as default } from './chunks/nitro/node-server.mjs';
 import 'fs';
 import 'path';
+import 'graphql-request';
 import 'node:fs';
 import 'node:url';
 import 'unified';

@@ -52,26 +52,14 @@
 <script setup>
 const activeAccordion = ref(null)
 const { locale } = useI18n()
-  const query = gql`
-      query GetFaqsEdges($locale: I18NLocaleCode!) {
-        faqs(locale: $locale) {
-          data {
-            attributes {
-                question
-                answer
-            }
-          }
-        }
-      }
-  `
-    const { data, refresh } = await useAsyncQuery(query, { locale: locale.value } )
-    const faqs = ref(data.value.faqs.data)
-    const handleAccordion = (index) => {
-        activeAccordion.value = activeAccordion.value === index ? null : index
-    }
-    onMounted(() => {
-        refresh()
-    })
+const { data } = await useAsyncGql({
+    operation: 'faqs',
+    variables: { locale: locale.value }
+})
+const faqs = ref(data.value.faqs.data)
+const handleAccordion = (index) => {
+    activeAccordion.value = activeAccordion.value === index ? null : index
+}
 </script>
 
   

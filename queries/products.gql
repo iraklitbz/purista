@@ -1,0 +1,40 @@
+
+    query products($locale: I18NLocaleCode!) {
+        products(locale: $locale) {
+            data {
+            id
+            attributes {
+                title
+                price
+                slug
+                feature {
+                data {
+                    attributes {
+                        url
+                    }
+                }
+                }
+            }
+            }
+        }
+    }
+    query product($slug: String!, $locale: I18NLocaleCode!) {
+        products(locale: $locale, filters:{slug:{eq: $slug}}) {
+            data {
+            id
+            attributes {
+                title
+                price
+                slug
+                description
+                feature {
+                data {
+                    attributes {
+                        url
+                    }
+                }
+                }
+            }
+            }
+        }
+    }

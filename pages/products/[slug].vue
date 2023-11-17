@@ -40,30 +40,11 @@ import MarkdownIt from "markdown-it"
 const markdown = new MarkdownIt();
 const route = useRoute()
 const { locale } = useI18n()
-const query = gql`
-      query GetProductEdges($slug: String!, $locale: I18NLocaleCode!) {
-        products(locale: $locale, filters:{slug:{eq: $slug}}) {
-          data {
-            attributes {
-              title
-              price
-              slug,
-              description
-              feature {
-                data {
-                  attributes {
-                    url
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-  `
-  
-  const { data } = await useAsyncQuery(query, { slug: route.params.slug, locale: locale.value } )
-  const product = ref(data.value.products.data[0].attributes)
+const { data } = await useAsyncGql({
+  operation: 'product',
+  variables: { slug: route.params.slug, locale: locale.value }
+})
+const product = ref(data.value.products.data[0].attributes)
 </script>
 <style scope>
   .list li {
