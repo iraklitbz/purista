@@ -64,11 +64,14 @@ const { locale } = useI18n()
         }
       }
   `
-    const { data } = await useAsyncQuery(query, { locale: locale.value } )
+    const { data, refresh } = await useAsyncQuery(query, { locale: locale.value } )
     const faqs = ref(data.value.faqs.data)
     const handleAccordion = (index) => {
         activeAccordion.value = activeAccordion.value === index ? null : index
     }
+    onMounted(() => {
+        refresh()
+    })
 </script>
 
   
