@@ -12,7 +12,6 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxt/types": "^2.17.0",
-    "@nuxtjs/apollo": "5.0.0-alpha.8",
     "@nuxtjs/fontaine": "^0.4.0",
     "@nuxtjs/google-fonts": "^3.0.1",
     "@nuxtjs/i18n": "8.0.0-beta.13",

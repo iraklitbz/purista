@@ -49,17 +49,17 @@
     </section>
   </template>
   
-<script setup>
-const activeAccordion = ref(null)
-const { locale } = useI18n()
-const { data } = await useAsyncGql({
-    operation: 'faqs',
-    variables: { locale: locale.value }
-})
-const faqs = ref(data.value.faqs.data)
-const handleAccordion = (index) => {
-    activeAccordion.value = activeAccordion.value === index ? null : index
-}
-</script>
+  <script setup>
+  const activeAccordion = ref(null)
+  const { locale } = useI18n()
+  const { data } = await useAsyncGql({
+      operation: 'faqs',
+      variables: { locale: locale.value }
+  })
+  const faqs = ref(data.value.faqs.data)
+  const handleAccordion = (index) => {
+      activeAccordion.value = activeAccordion.value === index ? null : index
+  }
+  </script>
 
   
