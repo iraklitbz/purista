@@ -792,7 +792,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/index-10319da4.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/index-4a2f535f.mjs').then((m) => m.default || m)
   },
   {
     name: "products___en",
@@ -800,7 +800,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/index-10319da4.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/index-4a2f535f.mjs').then((m) => m.default || m)
   }
 ];
 const _wrapIf = (component, props, slots) => {
