@@ -57,5 +57,8 @@ export default defineNuxtConfig({
       ],
       vueI18n: './i18n.config.ts',
       defaultLocale: 'ka'
+    },
+    build: {
+      transpile: ['tslib']
     }
 })
