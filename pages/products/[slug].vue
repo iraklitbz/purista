@@ -22,6 +22,7 @@
                             >
                           </ul>
                           <div
+                              v-if="user"
                               class="relative mt-10"
                           >
                               <div class="number-input absolute left-0 top-0 z-30">
@@ -61,6 +62,7 @@
 import MarkdownIt from "markdown-it"
 import { useCartStore } from '~/store/cart'
 import { useAlertStore } from '~/store/alert'
+const user = useStrapiUser()
 const markdown = new MarkdownIt();
 const route = useRoute()
 const cartStore = useCartStore()

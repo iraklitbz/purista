@@ -37,6 +37,7 @@
             class="mt-7"
         >
         <div
+            v-if="user"
             class="relative"
         >
             <div class="number-input absolute left-0 top-0 z-30">
@@ -66,6 +67,7 @@
 <script setup>
 import { useCartStore } from '~/store/cart'
 import { useAlertStore } from '~/store/alert'
+const user = useStrapiUser()
 const props = defineProps({
     product: {
         type: Object,

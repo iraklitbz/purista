@@ -57,6 +57,7 @@
                     logout
                 </button>
                 <button
+                    v-if="user"
                     class="ml-7 no-underline relative text-primary hover:text-white transition-colors text-xl md:text-lg" 
                     @click="handleToggleMenu"
                 > 
