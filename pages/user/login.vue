@@ -37,11 +37,17 @@
                             >
                         </div>
                         <button 
-                            class="button m-auto w-full button--aylen px-5 py-3 bg-primary hover:bg-primary-light hover:text-white relative block focus:outline-none border-2 text-white border-solid rounded-lg text-lg text-center font-semibold uppercase tracking-widest overflow-hidden" 
+                            class="button m-auto w-full button--aylen px-5 py-3 bg-primary hover:bg-primary-light hover:text-white relative block focus:outline-none border-2 text-white border-solid rounded-lg text-lg text-center font-semibold tracking-widest overflow-hidden" 
                             type="submit"
                             >
                            Login
                         </button>
+                        <p
+                            v-if="userWrong"
+                            class="text-red-500 text-center mt-5"
+                        >
+                            User or password wrong
+                        </p>
                     </form>
                 </div>
             </div>
@@ -53,12 +59,14 @@
     const router = useRouter()
     const identifier = ref('')
     const password = ref('')
+    const userWrong = ref(false)
     const onSubmit = async () => {
         try {
             await login({ identifier: identifier.value, password: password.value })
+            userWrong.value = false
             router.push('/')
         } catch (e) {
-            console.log(e)
+            userWrong.value = true
         }
     }
 </script>

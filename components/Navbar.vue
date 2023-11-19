@@ -47,14 +47,21 @@
                     class="ml-3 no-underline text-primary hover:text-white transition-colors text-xl md:text-lg" 
                     :to="localePath('/user/login', locale)"
                 > 
-                    Login
+                    <nuxt-icon
+                        name="user"
+                        class="icon icon-fill text-3xl relative"
+                    />
                 </nuxt-link>
                 <button
                     v-else
                     class="ml-3 no-underline text-primary hover:text-white transition-colors text-xl md:text-lg" 
+                    title="Logout"
                     @click="hanldeLogout"
                 > 
-                    logout
+                    <nuxt-icon
+                        name="logout"
+                        class="icon icon-fill text-3xl relative"
+                    />
                 </button>
                 <button
                     v-if="user"

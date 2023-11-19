@@ -12,6 +12,7 @@ export default defineNuxtConfig({
         '@nuxt/content',
         '@nuxtjs/strapi',
         '@pinia/nuxt',
+        '@vueuse/nuxt',
         ['@nuxtjs/google-fonts', {
             families: {
               'Montserrat': [300, 400, 700],
@@ -49,7 +50,7 @@ export default defineNuxtConfig({
         {
           code: 'ka',
           name: 'georgian',
-          label: 'KA'
+          label: 'GE'
         },
         {
           code: 'en',

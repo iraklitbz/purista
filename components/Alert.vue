@@ -1,7 +1,7 @@
 <template>
     <div>
         <div 
-            class="p-4 mb-4 text-sm rounded-lg text-center"
+            class="p-4 mb-4 text-md rounded-lg text-center"
              :class="state === 'success' ? 'bg-green-100 text-green-800 dark:text-green-400' : 'bg-red-50 text-red-800'"
             >
             <span class="font-medium">

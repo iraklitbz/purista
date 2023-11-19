@@ -33,10 +33,10 @@
                     <div
                         class="mt-3 flex"
                     >
-                        <div class="number-input mr-2">
+                        <div class="number-input mr-2 w-[60px]">
                             <input 
                                 v-model="props.product.quantity"
-                                class="form-control  appearance-none border border-none px-3 rounded-md text-md leading-2 transition duration-200 outline-none placeholder:opacity-100 placeholder:text-gray-400 " 
+                                class="form-control  appearance-none w-full border border-none px-3 rounded-md text-md leading-2 transition duration-200 outline-none placeholder:opacity-100 placeholder:text-gray-400 " 
                                 :class="{
                                     'bg-primary-dark': !props.alternative,
                                     'bg-primary-lighter text-primary-darker': props.alternative

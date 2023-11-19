@@ -25,10 +25,10 @@
                               v-if="user"
                               class="relative mt-10"
                           >
-                              <div class="number-input absolute left-0 top-0 z-30">
+                              <div class="number-input absolute left-0 top-0 w-[60px] z-30">
                                   <input 
                                       v-model="productQty"
-                                      class="form-control text-white appearance-none bg-primary-dark border border-none px-3 rounded-md text-md h-[40px] leading-2 transition duration-200 outline-none placeholder:opacity-100 placeholder:text-gray-400 " 
+                                      class="form-control text-white appearance-none w-full bg-primary-dark border border-none px-3 rounded-md text-md h-[40px] leading-2 transition duration-200 outline-none placeholder:opacity-100 placeholder:text-gray-400 " 
                                       type="number" 
                                       name="qtyInput" 
                                       :id="'qtyInput_' + product.id"

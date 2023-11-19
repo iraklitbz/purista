@@ -1,11 +1,28 @@
 import { defineStore } from 'pinia'
+interface Product {
+    quantity: number,
+    id: string
+    attributes: {
+        title: string
+        price: number
+        slug: string
+        feature: {
+            data: {
+                attributes: {
+                    url: string
+                    formats: {
+                        small: {
+                            url: string
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 export const useCartStore = defineStore('cartStore', () => {
     const toggleCart = ref(false)
-    const cartCookies = useCookie('cart')
-    const cartProducts = ref([]);
-    if (cartCookies.value) {
-        cartProducts.value = cartCookies.value
-    }
+    const cartProducts = ref<Product[]>([]);
     const totalQuantity = computed(() => {
         return cartProducts.value.reduce((total, product) => total + product.quantity, 0);
     })
@@ -15,16 +32,15 @@ export const useCartStore = defineStore('cartStore', () => {
     function handleCloseMenu() {
         toggleCart.value = false
     }
-    function addToCart(product) {
+    function addToCart(product: Product) {
         const existProductIndex = cartProducts.value.findIndex((p) => p.id === product.id)
         if (existProductIndex !== -1) {
             cartProducts.value[existProductIndex].quantity += product.quantity
         } else {
             cartProducts.value.push(product)
         }
-        cartCookies.value = cartProducts.value
     }
-    function removeFromCart(product) {
+    function removeFromCart(product: Product) {
         const existProductIndex = cartProducts.value.findIndex((p) => p.id === product.id);
         
         if (existProductIndex !== -1) {
@@ -38,11 +54,9 @@ export const useCartStore = defineStore('cartStore', () => {
             cartProducts.value.splice(existProductIndex, 1);
           }
         }
-        cartCookies.value = cartProducts.value
     }
     function handleEmptyCart() {
         cartProducts.value = [];
-        cartCookies.value = cartProducts.value
     }
     return { 
             handleToggleMenu,

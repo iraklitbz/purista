@@ -12,27 +12,27 @@
                 :to="localePath(`/products/${item.attributes.slug}`, locale)"
                 class="prod-card-v2__img-link rounded-lg shadow-md"
             >
-            <figure
-                class="rounded-xl shadow-md overflow-hidden"
-            >
-                <img 
-                  class="w-full object-cover transition-all duration-500 ease-in-out group-hover:scale-105" 
-                  :src="item.attributes.feature.data.attributes.formats.small.url"
-                />
-            </figure>
+                <figure
+                    class="rounded-xl shadow-md overflow-hidden"
+                >
+                    <img 
+                    class="w-full object-cover transition-all duration-500 ease-in-out group-hover:scale-105" 
+                    :src="item.attributes.feature.data.attributes.formats.small.url"
+                    />
+                </figure>
             </nuxt-link>
 
             <div class="p-1 lg:p-1 text-center">
             <h2 class="text-lg lg:text-2xl">
                 <nuxt-link 
-                :to="localePath(`/products/${item.attributes.slug}`, locale)"
-                class="product-card-v2__title text-lg font-bold leading-4 hover:text-primary transition-colors ease-in duration-200">
-                    {{item.attributes.title}}
-                </nuxt-link>
+                    :to="localePath(`/products/${item.attributes.slug}`, locale)"
+                    class="product-card-v2__title text-lg font-bold leading-4 hover:text-primary transition-colors ease-in duration-200">
+                        {{item.attributes.title}}
+                    </nuxt-link>
                 </h2>
 
             <div class="my-1 lg:my-1.5">
-                <span class="prod-card-v2__price text-primary font-bold text-xl">
+                <span class="prod-card-v2__price text-primary text-xl">
                     {{item.attributes.price}} ₾
                 </span>
             </div>

@@ -6,16 +6,18 @@
             </nuxt-link>
         </div>
          <ul class="flex justify-center">
-            <li class="text-center mr-2"><a target="_blank" href="https://www.facebook.com/profile.php?id=100064998761253">
+            <li class="text-center mr-2">
+                <a target="_blank" href="https://www.facebook.com/profile.php?id=100064998761253">
                 <nuxt-icon
                     name="facebook"
-                    class="icon icon-fill text-3xl text-primary relative"
+                    class="icon icon-fill text-3xl text-primary hover:text-white transition-colors ease-in duration-200 relative"
                 />
             </a></li>
-            <li class="text-center"><a target="_blank" href="https://www.instagram.com/purista.ge/">
+            <li class="text-center">
+                <a target="_blank" href="https://www.instagram.com/purista.ge/">
                 <nuxt-icon
                     name="instagram"
-                    class="icon icon-fill text-3xl text-primary"
+                    class="icon icon-fill text-3xl text-primary hover:text-white transition-colors ease-in duration-200"
                 />
             </a></li>
         </ul>
