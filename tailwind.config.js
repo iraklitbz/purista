@@ -21,6 +21,8 @@ module.exports = {
         'primary': '#D4AD68',
         'primary-light': '#ddbe87',
         'primary-lighter': '#f7efe2',
+        'primary-dark': '#c7943a',
+        'primary-darker': '#9a722c',
       }
     }
   },

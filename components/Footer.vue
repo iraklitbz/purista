@@ -6,16 +6,16 @@
             </nuxt-link>
         </div>
          <ul class="flex justify-center">
-            <li class="text-center text-white mr-2"><a cl target="_blank" href="https://www.facebook.com/profile.php?id=100064998761253">
+            <li class="text-center mr-2"><a target="_blank" href="https://www.facebook.com/profile.php?id=100064998761253">
                 <nuxt-icon
                     name="facebook"
-                    class="icon icon-stroke text-2xl text-tui-sky-blue relative"
+                    class="icon icon-fill text-3xl text-primary relative"
                 />
             </a></li>
-            <li class="text-center text-white"><a target="_blank" href="https://www.instagram.com/purista.ge/">
+            <li class="text-center"><a target="_blank" href="https://www.instagram.com/purista.ge/">
                 <nuxt-icon
                     name="instagram"
-                    class="icon icon-stroke text-2xl text-tui-sky-blue relative"
+                    class="icon icon-fill text-3xl text-primary"
                 />
             </a></li>
         </ul>

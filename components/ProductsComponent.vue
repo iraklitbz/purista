@@ -43,9 +43,8 @@
 </div>
 </template>
 <script setup>
-  const { t } = useI18n()
-  const localePath = useLocalePath()
   const { locale } = useI18n()
+  const localePath = useLocalePath()
   const { data } = await useAsyncGql({
     operation: 'outstanding',
     variables: { locale: locale.value }

@@ -32,7 +32,7 @@
         <div class="my-20 flex justify-center">
             <nuxt-link 
               class="button button--aylen px-5 py-3 bg-primary hover:bg-primary-light hover:text-white relative block focus:outline-none border-2 text-white border-solid rounded-lg text-xl text-center font-semibold uppercase tracking-widest overflow-hidden" 
-              :to="localePath('/contact', locale.value)"
+              :to="localePath('/contact', locale)"
             >
               {{ $t('about.button') }}
             </nuxt-link>
@@ -44,46 +44,3 @@
   const { locale } = useI18n()
   const localePath = useLocalePath()
 </script>
-<style scoped>
-.button {
-	min-width: 150px;
-	max-width: 250px;
-	z-index: 1;
-	-webkit-backface-visibility: hidden;
-	-moz-osx-font-smoothing: grayscale;
-}
-/* Aylen */
-.button.button--aylen {
-	-webkit-transition: color 0.3s;
-	transition: color 0.3s;
-}
-.button--aylen::before,
-.button--aylen::after {
-	content: '';
-	position: absolute;
-	height: 100%;
-	width: 100%;
-	bottom: 100%;
-	left: 0;
-	z-index: -1;
-	-webkit-transition: -webkit-transform 0.3s;
-	transition: transform 0.3s;
-	-webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
-	transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
-}
-.button--aylen::before {
-	background: #ead6b4;
-}
-.button--aylen::after {
-	background: #D4AD68;
-}
-.button--aylen:hover::before,
-.button--aylen:hover::after {
-	-webkit-transform: translate3d(0, 100%, 0);
-	transform: translate3d(0, 100%, 0);
-}
-.button--aylen:hover::after {
-	-webkit-transition-delay: 0.175s;
-	transition-delay: 0.175s;
-}
-</style>

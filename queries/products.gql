@@ -8,11 +8,12 @@
                 price
                 slug
                 feature {
-                data {
-                    attributes {
-                        url
+                    data {
+                        attributes {
+                            formats
+                            url
+                        }
                     }
-                }
                 }
             }
             }
@@ -28,11 +29,12 @@
                 slug
                 description
                 feature {
-                data {
-                    attributes {
-                        url
+                    data {
+                        attributes {
+                            formats
+                            url
+                        }
                     }
-                }
                 }
             }
             }

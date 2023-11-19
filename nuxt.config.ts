@@ -10,6 +10,8 @@ export default defineNuxtConfig({
         '@nuxt/image',
         'nuxt-graphql-client',
         '@nuxt/content',
+        '@nuxtjs/strapi',
+        '@pinia/nuxt',
         ['@nuxtjs/google-fonts', {
             families: {
               'Montserrat': [300, 400, 700],
@@ -19,6 +21,13 @@ export default defineNuxtConfig({
             }
           }]
     ],
+    strapi: {
+      url: process.env.STRAPI_URL || 'http://localhost:1337',
+      prefix: '/api',
+      version: 'v4',
+      cookie: {},
+      cookieName: 'purista_jwt'
+    },
     image: {
       provider: 'cloudinary',
       cloudinary: {

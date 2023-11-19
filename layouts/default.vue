@@ -3,7 +3,7 @@
         <div
             class="general"
         >
-            <Header/>
+            <Header />
         </div>
         <slot />
         <Footer />

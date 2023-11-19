@@ -1,0 +1,19 @@
+query user($id: ID) {
+  usersPermissionsUser(id: $id) {
+    data {
+      attributes {
+        email
+        company {
+          data {
+            attributes {
+              name
+              street
+              city
+              postal
+            }
+          }
+        }
+      }
+    }
+  }
+}
