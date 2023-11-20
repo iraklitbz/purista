@@ -21,7 +21,7 @@
                 </li>
             </ul>
             <div
-                class="ml-7 flex items-center justify-center mt-10 md:mt-0"
+                class="md:ml-7 flex md:flex-row flex-col items-center justify-center mt-10 md:mt-0"
             >
                 <ul class="flex items-center justify-center">
                     <li 
@@ -44,7 +44,7 @@
                 </ul>
                 <nuxt-link 
                     v-if="!user"
-                    class="ml-3 no-underline text-primary hover:text-white transition-colors text-xl md:text-lg" 
+                    class="md:ml-3 no-underline text-primary hover:text-white transition-colors text-xl md:text-lg" 
                     :to="localePath('/user/login', locale)"
                 > 
                     <nuxt-icon
@@ -54,7 +54,7 @@
                 </nuxt-link>
                 <button
                     v-else
-                    class="ml-3 no-underline text-primary hover:text-white transition-colors text-xl md:text-lg" 
+                    class="md:l-3 no-underline text-primary hover:text-white transition-colors text-xl md:text-lg" 
                     title="Logout"
                     @click="hanldeLogout"
                 > 
@@ -65,7 +65,7 @@
                 </button>
                 <button
                     v-if="user"
-                    class="ml-7 no-underline relative text-primary hover:text-white transition-colors text-xl md:text-lg" 
+                    class="md:ml-7 mt-4 md:mt-0 no-underline relative text-primary hover:text-white transition-colors text-xl md:text-lg" 
                     @click="handleToggleMenu"
                 > 
                     <nuxt-icon
@@ -81,20 +81,20 @@
                     </span>
                 </button>
             </div>
-            <a @click="handleToggleMenu" class="md:hidden cursor-pointer absolute right-5 top-5">
+            <a @click="toggleMenu" class="md:hidden cursor-pointer absolute right-5 top-5">
                 <nuxt-icon
                     name="cross"
-                    class="icon icon-fill text-xl text-tui-sky-blue relative text-primary"
+                    class="icon icon-fill text-3xl text-tui-sky-blue relative text-primary"
                 />
             </a>
         </nav>
         <a 
             @click="toggleMenu"
-            class="md:hidden cursor-pointer flex justify-center border-t-2 border-solid border-primary pt-1 pb-1"
+            class="md:hidden cursor-pointer text-black flex justify-center border-t-2 border-solid border-primary pt-1 pb-1"
         >
             <nuxt-icon
                 name="menu"
-                class="icon icon-stroke text-xl text-tui-sky-blue relative"
+                class="icon text-3xl relative"
             />
         </a>
         <ShopCart 
