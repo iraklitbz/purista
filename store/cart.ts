@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { useStorage } from '@vueuse/core'
 interface Product {
     quantity: number,
     id: string
@@ -22,9 +23,16 @@ interface Product {
 }
 export const useCartStore = defineStore('cartStore', () => {
     const toggleCart = ref(false)
-    const cartProducts = ref<Product[]>([]);
+    const cartProducts = ref<Product[]>([])
+    const cartCookies = useCookie<Product[]>('cart', {default: () => []})
+    if(cartCookies.value) {
+        cartProducts.value = cartCookies.value
+    }
     const totalQuantity = computed(() => {
         return cartProducts.value.reduce((total, product) => total + product.quantity, 0);
+    })
+    watch(cartProducts, (newValue) => {
+        cartCookies.value = newValue
     })
     function handleToggleMenu() {
         toggleCart.value = !toggleCart.value
