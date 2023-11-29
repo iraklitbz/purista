@@ -66,7 +66,9 @@ export default defineNuxtConfig({
     },
     runtimeConfig: {
       public: {
-        GQL_HOST: 'https://puristaback.com/graphql'
+        GQL_HOST: 'https://puristaback.com/graphql',
+        CEM_URL: process.env.CEM_URL,
+        SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
       }
     }
 })

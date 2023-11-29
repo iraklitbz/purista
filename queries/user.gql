@@ -3,6 +3,7 @@ query user($id: ID) {
     data {
       attributes {
         email
+        username
         company {
           data {
             attributes {

@@ -36,6 +36,8 @@
     "markdown-it": "^13.0.2",
     "nuxt-graphql-client": "^0.2.31",
     "pinia": "^2.1.7",
-    "plyr": "^3.7.2"
+    "plyr": "^3.7.2",
+    "@sendgrid/client": "^7.7.0",
+    "@sendgrid/mail": "^7.7.0"
   }
 }

@@ -113,7 +113,7 @@
                 <CartReview />
                 <form
                     class=""
-                    v-if="user"
+                    v-if="user && dataProducts.length"
                 >
                     <div
                         class="mt-10"
@@ -171,12 +171,18 @@
                             </div>
                         </div>
                     </div>
-                    <nuxt-link
+                    <button
                         class="mt-7 first-line:button button--aylen px-5 py-3 w-full bg-primary hover:bg-primary-light hover:text-white relative block focus:outline-none border-2 text-white border-solid rounded-lg text-xl text-center font-semibold tracking-widest overflow-hidden" 
-                        :to="localePath('/thanks', locale)"
+                        @click="handleBuy(event)"
                     >
                         Buy
-                    </nuxt-link>
+                    </button>
+                    <p
+                        v-if="error"
+                        class="mt-4 text-lg text-red-500 text-center"
+                    >
+                        Error, please try again
+                    </p>
                 </form>
             </div>
         </div>
@@ -186,19 +192,76 @@
     import { useCartStore } from '~/store/cart'
     const user = useStrapiUser()
     const cartStore = useCartStore()
+    const { cartProducts } = cartStore
+    const dataProducts = ref([])
+    const error = ref(false)
+    dataProducts.value = cartProducts
+    // user info
+    const direction = ref(null)
+    const name = ref(null)
+    const email = ref(null)
+    const company = ref(null)
+    const date = ref(null)
+    const payed = ref(null)
+    const products = ref(null)
     //CART
-    const { handleCloseMenu } = cartStore
-const { locale } = useI18n()
-const localePath = useLocalePath()
-const userData = ref(null)
-if(user.value) {
-    const { data } = await useAsyncGql({
-        operation: 'user',
-        variables: { id: user.value.id }
-    });
-    userData.value = data.value.usersPermissionsUser.data.attributes
-}
-onMounted(() => {
-    handleCloseMenu()
-})
+    const { handleCloseMenu, handleEmptyCart } = cartStore
+    const { locale } = useI18n()
+    const localePath = useLocalePath()
+    const userData = ref(null)
+    if(user.value) {
+        const { data } = await useAsyncGql({
+            operation: 'user',
+            variables: { id: user.value.id }
+        });
+        userData.value = data.value.usersPermissionsUser.data.attributes
+    }
+    onMounted(() => {
+        handleCloseMenu()
+    })
+    const mapFields = async () => {
+        let counter = 1
+        products.value = dataProducts.value.map(item => {
+        const key = `product${counter++}`;
+        return {
+            [key]: {
+                id: item.id,
+                title: item.attributes.title,
+                price: item.attributes.price,
+                quantity: item.quantity,
+            },
+        };
+        }).reduce((acc, obj) => Object.assign(acc, obj), {});
+        // totaly value
+        payed.value = dataProducts.value.reduce((total, product) => {
+            return total + product.attributes.price * product.quantity;
+        }, 0)
+    }
+    const handleBuy = async () => {
+        event.preventDefault()
+        error.value = false
+        mapFields()
+        direction.value = `${userData.value.company.data.attributes.street}, ${userData.value.company.data.attributes.city}, ${userData.value.company.data.attributes.postal}`,
+        name.value = userData.value.username,
+        email.value = userData.value.email,
+        company.value = userData.value.company.data.attributes.name,
+        date.value = new Date(),
+        payed.value = payed.value + ' ₾',
+        products.value
+        const data = await useOrders(
+            direction.value,
+            name.value,
+            email.value,
+            company.value,
+            date.value,
+            payed.value,
+            products.value
+        )
+        if(data && !data.error) {
+            handleEmptyCart()
+            navigateTo('/thanks')
+        } else {
+            error.value = true
+        }
+    }
 </script>

@@ -1,0 +1,1 @@
+import{ap as o,h as r}from"./entry.bfe4695d.js";const s=o("alertStore",()=>{const t=r(!1),l=r("");let e=null;function u(a){e!==null&&(clearTimeout(e),e=null),t.value=!0,l.value=a,e=setTimeout(()=>{t.value=!1},3e3)}return{handleAlertMenu:u,alertActive:t,message:l}});export{s as u};
