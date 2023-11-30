@@ -61,7 +61,8 @@ export const useCartStore = defineStore('cartStore', () => {
         }
     }
     function handleEmptyCart() {
-        cartProducts.value = [];
+        cookieCart.value = []
+        cartProducts.value = []
     }
     return { 
             handleToggleMenu,

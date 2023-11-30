@@ -80,10 +80,11 @@
         toggleCart = !toggleCart
     }
     const totalPrice = computed(() => {
-        return dataProducts.value.reduce((total, product) => {
-            return total + product.attributes.price * product.quantity;
-        }, 0);
-    })
+      return dataProducts.value.reduce((total, product) => {
+          const productTotal = product.attributes.price * product.quantity;
+          return total + productTotal;
+      }, 0).toFixed(2); // Ajusta el número de decimales según tu lógica
+  });
     const handleRemoveItemsCart = () => {
       handleEmptyCart()
       dataProducts.value = []

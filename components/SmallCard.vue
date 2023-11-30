@@ -57,7 +57,7 @@
                             }"
                         >
                             {{
-                                props.product.attributes.price * props.product.quantity
+                                (props.product.attributes.price * props.product.quantity).toFixed(2)
                             }} ₾
                         </p>
                         <button 

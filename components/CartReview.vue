@@ -39,9 +39,10 @@
     dataProducts.value = cartProducts
     const totalPrice = computed(() => {
         return dataProducts.value.reduce((total, product) => {
-            return total + product.attributes.price * product.quantity;
-        }, 0);
-    })
+            const productTotal = product.attributes.price * product.quantity;
+            return total + productTotal;
+        }, 0).toFixed(2);
+    });
     const handleRemoveItemsCart = () => {
       handleEmptyCart()
       dataProducts.value = []
