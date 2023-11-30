@@ -24,15 +24,12 @@ interface Product {
 export const useCartStore = defineStore('cartStore', () => {
     const toggleCart = ref(false)
     const cartProducts = ref<Product[]>([])
-    const cartCookies = useCookie<Product[]>('cart', {default: () => []})
-    if(cartCookies.value) {
-        cartProducts.value = cartCookies.value
-    }
+    const cookieCart = useStorage('CART', <Product[]> [])
     const totalQuantity = computed(() => {
         return cartProducts.value.reduce((total, product) => total + product.quantity, 0);
     })
-    watch(cartProducts, (newValue) => {
-        cartCookies.value = newValue
+    watch(cartProducts, () => {
+        cartProducts.value = cookieCart.value
     })
     function handleToggleMenu() {
         toggleCart.value = !toggleCart.value
@@ -73,7 +70,7 @@ export const useCartStore = defineStore('cartStore', () => {
             removeFromCart, 
             handleEmptyCart, 
             toggleCart, 
-            cartProducts, 
+            cartProducts,
             totalQuantity
         }  
   })

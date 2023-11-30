@@ -1,4 +1,5 @@
 <template>
+                    <ClientOnly>
     <div 
         :class="menusIsSticky ? 'md:fixed w-full top-0 z-[100]' : ''"
     >
@@ -63,23 +64,24 @@
                         class="icon icon-fill text-3xl relative"
                     />
                 </button>
-                <button
-                    v-if="user"
-                    class="md:ml-7 mt-4 md:mt-0 no-underline relative text-primary hover:text-white transition-colors text-xl md:text-lg" 
-                    @click="handleToggleMenu"
-                > 
-                    <nuxt-icon
-                        name="cart"
-                        class="icon icon-fill text-3xl text-primary relative"
-                    />
-                    <span
-                        v-if="totalQuantity > 0"
-                        class="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
-                        :class="pulse ? 'pulse-animation' : ''"
-                    >
-                        {{ totalQuantity }}
-                    </span>
-                </button>
+
+                    <button
+                        v-if="user"
+                        class="md:ml-7 mt-4 md:mt-0 no-underline relative text-primary hover:text-white transition-colors text-xl md:text-lg" 
+                        @click="handleToggleMenu"
+                    > 
+                        <nuxt-icon
+                            name="cart"
+                            class="icon icon-fill text-3xl text-primary relative"
+                        />
+                        <span
+                            v-if="totalQuantity > 0"
+                            class="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                            :class="pulse ? 'pulse-animation' : ''"
+                        >
+                            {{ totalQuantity }}
+                        </span>
+                    </button>
             </div>
             <a @click="toggleMenu" class="md:hidden cursor-pointer absolute right-5 top-5">
                 <nuxt-icon
@@ -111,10 +113,12 @@
             :message="message"
         />
     </div>
+</ClientOnly>
 </template>
 <script setup>
     import { useCartStore } from '~/store/cart'
     import { useAlertStore } from '~/store/alert'
+    const user = useStrapiUser()
     const cartStore = useCartStore()
     const alertStore = useAlertStore()
     //CART
@@ -125,7 +129,6 @@
     const { locale, locales, setLocale } = useI18n()
     const { logout } = useStrapiAuth()
     const route = useRouter()
-    const user = useStrapiUser()
     const menusIsSticky = ref(false)
     const localePath = useLocalePath()
     const pulse = ref(false)
