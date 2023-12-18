@@ -43,11 +43,4 @@
             return total + productTotal;
         }, 0).toFixed(2);
     });
-    const handleRemoveItemsCart = () => {
-      handleEmptyCart()
-      dataProducts.value = []
-    }
-    const handleCheckout = () => {
-        console.log('checkout', cartProducts)
-    }
 </script>

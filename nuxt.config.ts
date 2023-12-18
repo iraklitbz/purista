@@ -68,6 +68,8 @@ export default defineNuxtConfig({
       public: {
         GQL_HOST: 'https://puristaback.com/graphql',
         CEM_URL: process.env.CEM_URL,
+        GEORGIAN_BANK_NAME: process.env.GEORGIAN_BANK_NAME,
+        GEORGIAN_BANK_PASSWORD: process.env.GEORGIAN_BANK_PASSWORD,
         SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
       }
     }
