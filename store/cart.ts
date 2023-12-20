@@ -21,57 +21,52 @@ interface Product {
         }
     }
 }
-export const useCartStore = defineStore('cartStore', () => {
-    const toggleCart = ref(false)
-    const cartProducts = ref<Product[]>([])
-    const cookieCart = useStorage('CART', <Product[]> [])
-    const totalQuantity = computed(() => {
-        return cartProducts.value.reduce((total, product) => total + product.quantity, 0);
-    })
-    watch(cartProducts, () => {
-        cartProducts.value = cookieCart.value
-    })
-    function handleToggleMenu() {
-        toggleCart.value = !toggleCart.value
-    }
-    function handleCloseMenu() {
-        toggleCart.value = false
-    }
-    function addToCart(product: Product) {
-        const existProductIndex = cartProducts.value.findIndex((p) => p.id === product.id)
-        if (existProductIndex !== -1) {
-            cartProducts.value[existProductIndex].quantity += product.quantity
-        } else {
-            cartProducts.value.push(product)
+export const cart = defineStore({
+    id: 'cart',
+    state: () => ({
+        toggleCart: false,
+        cartProducts: <Product[]> []
+    }),
+    persist: {
+        storage: persistedState.localStorage
+    },
+    getters: {
+        totalQuantity(): number {
+            return this.cartProducts.reduce((total, product) => total + product.quantity, 0);
         }
-    }
-    function removeFromCart(product: Product) {
-        const existProductIndex = cartProducts.value.findIndex((p) => p.id === product.id);
+    },
+    actions: {
+        handleToggleMenu() {
+            this.toggleCart = !this.toggleCart
+        },
+        handleCloseMenu() {
+            this.toggleCart = false
+        },
+        addToCart(product: Product) {
+            const existProductIndex = this.cartProducts.findIndex((p) => p.id === product.id)
+            if (existProductIndex !== -1) {
+                this.cartProducts[existProductIndex].quantity += product.quantity
+            } else {
+                this.cartProducts.push(product)
+            }
+        },
+        removeFromCart(product: Product) {
+            const existProductIndex = this.cartProducts.findIndex((p) => p.id === product.id);
+            
+            if (existProductIndex !== -1) {
+              const existingProduct = this.cartProducts[existProductIndex];
+              
+              // Reducir la cantidad o eliminar el producto si la cantidad es 0 o menos
+              existingProduct.quantity -= product.quantity;
         
-        if (existProductIndex !== -1) {
-          const existingProduct = cartProducts.value[existProductIndex];
-          
-          // Reducir la cantidad o eliminar el producto si la cantidad es 0 o menos
-          existingProduct.quantity -= product.quantity;
-    
-          if (existingProduct.quantity <= 0) {
-            // Eliminar el producto del carrito si la cantidad es 0 o menos
-            cartProducts.value.splice(existProductIndex, 1);
-          }
+              if (existingProduct.quantity <= 0) {
+                // Eliminar el producto del carrito si la cantidad es 0 o menos
+                this.cartProducts.splice(existProductIndex, 1);
+              }
+            }
+        },
+        handleEmptyCart() {
+            this.cartProducts = []
         }
     }
-    function handleEmptyCart() {
-        cookieCart.value = []
-        cartProducts.value = []
-    }
-    return { 
-            handleToggleMenu,
-            handleCloseMenu, 
-            addToCart, 
-            removeFromCart, 
-            handleEmptyCart, 
-            toggleCart, 
-            cartProducts,
-            totalQuantity
-        }  
-  })
+})

@@ -112,7 +112,7 @@
             <div>
                 <CartReview />
                 <div
-                    class=""
+                    v-if="dataProducts.length > 0"
                 >
                         <button
                             class="mt-7 first-line:button button--aylen px-5 py-3 w-full bg-primary hover:bg-primary-light hover:text-white relative block focus:outline-none border-2 text-white border-solid rounded-lg text-xl text-center font-semibold tracking-widest overflow-hidden" 
@@ -132,26 +132,16 @@
     </section>
 </template>
 <script setup>
-    import { useCartStore } from '~/store/cart'
+    import { cart } from '~/store/cart'
     import { useTokenStore } from '~/store/token'
     const user = useStrapiUser()
-    const cartStore = useCartStore()
     const tokenStore = useTokenStore()
-    const { cartProducts } = cartStore
     const dataProducts = ref([])
     const error = ref(false)
-    dataProducts.value = cartProducts
-    // user info
-    const direction = ref(null)
-    const name = ref(null)
-    const email = ref(null)
-    const company = ref(null)
-    const date = ref(null)
-    const payed = ref(null)
-    const products = ref(null)
+    dataProducts.value = cart().cartProducts
     //CART
-    const { handleCloseMenu, handleEmptyCart } = cartStore
-    const { handleGetToken } = tokenStore
+    const { handleGetToken, token } = tokenStore
+    handleGetToken()
     const { locale } = useI18n()
     const localePath = useLocalePath()
     const userData = ref(null)
@@ -163,52 +153,33 @@
         userData.value = data.value.usersPermissionsUser.data.attributes
     }
     onMounted(() => {
-        handleCloseMenu()
+        cart().handleCloseMenu()
     })
-    const mapFields = async () => {
-        let counter = 1
-        products.value = dataProducts.value.map(item => {
-        const key = `product${counter++}`;
-        return {
-            [key]: {
-                id: item.id,
-                title: item.attributes.title,
-                price: item.attributes.price,
-                quantity: item.quantity,
-            },
-        };
-        }).reduce((acc, obj) => Object.assign(acc, obj), {});
-        // totaly value
-        payed.value = dataProducts.value.reduce((total, product) => {
-            return total + product.attributes.price * product.quantity;
-        }, 0)
-    }
-    
+    const totalPrice = computed(() => {
+        return dataProducts.value.reduce((total, product) => {
+            const productTotal = product.attributes.price * product.quantity;
+            return total + productTotal;
+        }, 0).toFixed(2);
+    });
     const handleBuy = async () => {
-        handleGetToken()
-        // event.preventDefault()
-        // error.value = false
-        // mapFields()
-        // direction.value = `${userData.value.company.data.attributes.street}, ${userData.value.company.data.attributes.city}, ${userData.value.company.data.attributes.postal}`,
-        // name.value = userData.value.username,
-        // email.value = userData.value.email,
-        // company.value = userData.value.company.data.attributes.name,
-        // date.value = new Date(),
-        // payed.value = payed.value + ' ₾',
-        // products.value
-        // const data = await useOrders(
-        //     direction.value,
-        //     name.value,
-        //     email.value,
-        //     company.value,
-        //     date.value,
-        //     payed.value,
-        //     products.value
-        // )
-        // if(data && !data.error) {
-        //     console.log(data)
-        // } else {
-        //     error.value = true
-        // }
+        error.value = false
+        const basket = dataProducts.value.map(item => {
+            return {
+                product_id: item.id,
+                quantity: item.quantity,
+                unit_price: item.attributes.price
+            }
+        })
+        const handleGeneratePayLink = await useSendOrder(token, totalPrice.value, basket)
+        if(handleGeneratePayLink && handleGeneratePayLink._links && handleGeneratePayLink._links.redirect.href) {
+           navigateTo(handleGeneratePayLink._links.redirect.href, {
+                external: true,
+                open: {
+                    target: '_blank'
+                }
+           })
+        } else {
+            error.value = true
+        }
     }
 </script>

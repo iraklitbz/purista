@@ -1,5 +1,10 @@
 import { defineStore } from 'pinia';
-
+interface TokenResponse {
+    access_token: string,
+    expires_in: number
+    token_type: string,
+    refresh_expires_in: number
+}
 export const useTokenStore = defineStore('tokenStore', () => {
     const config = useRuntimeConfig()
     const username = config.public.GEORGIAN_BANK_NAME
@@ -10,7 +15,7 @@ export const useTokenStore = defineStore('tokenStore', () => {
     postData.append('grant_type', 'client_credentials');
     const token = ref('')
     async function handleGetToken() {
-        const { data, error } = await useFetch(tokenEndpoint, {
+        const { data, refresh, error } = await useFetch<TokenResponse>(tokenEndpoint, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -21,7 +26,12 @@ export const useTokenStore = defineStore('tokenStore', () => {
         if (error.value) {
             console.error(error.value)
         }
-        console.log(data.value)
+        if (data.value) {
+            token.value = data.value.access_token
+            setTimeout(() => {
+                refresh()
+            }, data.value.expires_in)
+        }
     }
     return { handleGetToken, token }
 });

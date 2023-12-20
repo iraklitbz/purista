@@ -5,13 +5,13 @@
         <h2
             class="text-lg lg:text-2xl mb-10 text-center"
         >
-           Thank you for your purchase! we will send you an email with the details of your order.
+           Ups, something went wrong with your purchase, please try again.
         </h2>
         <nuxt-link
             class="mt-7 first-line:button button--aylen px-5 py-3 w-full bg-primary hover:bg-primary-light hover:text-white relative block focus:outline-none border-2 text-white border-solid rounded-lg text-xl text-center font-semibold tracking-widest overflow-hidden" 
-            :to="localePath('/', locale)"
+            :to="localePath('/checkout', locale)"
         >
-            Back to home
+            Back to checkout
         </nuxt-link>
     </section>
 </template>

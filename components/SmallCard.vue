@@ -62,7 +62,7 @@
                         </p>
                         <button 
                             class="ml-2 text-xs text-red-400 hover:text-red-500 transition-colors ease-in duration-200"
-                            @click="removeFromCart(props.product)"
+                            @click="cart().removeFromCart(props.product)"
                         >
                             Remove
                         </button>
@@ -73,7 +73,7 @@
 </template>
 
 <script setup>
-import { useCartStore } from '~/store/cart'
+import { cart } from '~/store/cart'
 const props = defineProps({
     product: {
         type: Object,
@@ -84,8 +84,6 @@ const props = defineProps({
         default: false
     }
 })
-const cartStore = useCartStore()
-const { removeFromCart } = cartStore
 const { locale } = useI18n()
 const localePath = useLocalePath()
 const handleTrucate = (text) => {

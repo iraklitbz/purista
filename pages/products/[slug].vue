@@ -60,15 +60,13 @@
   
 <script setup>
 import MarkdownIt from "markdown-it"
-import { useCartStore } from '~/store/cart'
+import { cart } from '~/store/cart'
 import { useAlertStore } from '~/store/alert'
 const user = useStrapiUser()
 const markdown = new MarkdownIt();
 const route = useRoute()
-const cartStore = useCartStore()
 const alertStore = useAlertStore()
 const { handleAlertMenu } = alertStore
-const { addToCart} = cartStore
 const { locale } = useI18n()
 const { data } = await useAsyncGql({
   operation: 'product',
@@ -81,7 +79,7 @@ const productQty = ref(1)
 const handleBeforeToCart = (product) => {
     const qty = productQty.value
     product.quantity = qty
-    addToCart({ ...product, quantity: qty })
+    cart().addToCart({ ...product, quantity: qty })
     handleAlertMenu(product.title)
 }
 </script>

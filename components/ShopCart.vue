@@ -67,14 +67,12 @@
         </div>
 </template>
 <script setup>
-    import { useCartStore } from '~/store/cart'
-    const cartStore = useCartStore()
-    const { handleEmptyCart, cartProducts } = cartStore
+    import { cart } from '~/store/cart'
     const { locale } = useI18n()
     const localePath = useLocalePath()
     const toggleCart = ref(false)
     const dataProducts = ref([])
-    dataProducts.value = cartProducts
+    dataProducts.value = cart().cartProducts
     const handleCloseCart = () => {
         let toggleCart = this.toggleCart
         toggleCart = !toggleCart
@@ -86,10 +84,10 @@
       }, 0).toFixed(2); // Ajusta el número de decimales según tu lógica
   });
     const handleRemoveItemsCart = () => {
-      handleEmptyCart()
+      cart().handleEmptyCart()
       dataProducts.value = []
     }
     const handleCheckout = () => {
-        console.log('checkout', cartProducts)
+        console.log('checkout', cart().cartProducts)
     }
 </script>
