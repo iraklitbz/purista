@@ -4,10 +4,11 @@ interface BasketItem {
     product_id: string;
   }
 export default async (token: string, totalPrice: number, basket: BasketItem[]) => {
+    const orderID = Date.now().toString();
     const apiUrl = 'https://api.bog.ge/payments/v1/ecommerce/orders';
     const requestData = {
         callback_url: 'https://purista.ge/checkout',
-        external_order_id: Date.now().toString(),
+        external_order_id:orderID,
         purchase_units: {
             currency: 'GEL',
             total_amount: totalPrice,

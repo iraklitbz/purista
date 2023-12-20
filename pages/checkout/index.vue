@@ -133,9 +133,11 @@
     </section>
 </template>
 <script setup>
+    import { useStorage } from '@vueuse/core'
     import { cart } from '~/store/cart'
     import { useTokenStore } from '~/store/token'
     const user = useStrapiUser()
+    const orderIDstorage = useStorage('orderID')
     const tokenStore = useTokenStore()
     const dataProducts = ref([])
     const error = ref(false)
@@ -172,14 +174,15 @@
             }
         })
         const handleGeneratePayLink = await useSendOrder(token, totalPrice.value, basket)
-        console.log(handleGeneratePayLink)
         if(handleGeneratePayLink && handleGeneratePayLink._links && handleGeneratePayLink._links.redirect.href) {
-           navigateTo(handleGeneratePayLink._links.redirect.href, {
-                external: true,
-                open: {
-                    target: '_blank'
-                }
-           })
+            orderIDstorage.value = handleGeneratePayLink.id
+            console.log(handleGeneratePayLink.id)
+            navigateTo(handleGeneratePayLink._links.redirect.href, {
+                    external: true,
+                    open: {
+                        target: '_blank'
+                    }
+            })
         } else {
             error.value = true
         }

@@ -87,7 +87,4 @@
       cart().handleEmptyCart()
       dataProducts.value = []
     }
-    const handleCheckout = () => {
-        console.log('checkout', cart().cartProducts)
-    }
 </script>

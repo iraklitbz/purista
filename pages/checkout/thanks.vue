@@ -17,14 +17,21 @@
 </template>
 
 <script setup>
+    import { useStorage } from '@vueuse/core'
     import { cart } from '~/store/cart'
-    const route = useRoute()
+    import { useTokenStore } from '~/store/token'
+    const orderIDstorage = useStorage('orderID')
+    const recibe = ref(null)
+    const tokenStore = useTokenStore()
+    const { handleGetToken, token } = tokenStore
+    await handleGetToken()
     const dataProducts = ref([])
     dataProducts.value = cart().cartProducts
     const { locale } = useI18n()
     const localePath = useLocalePath()
     // user info
     const user = useStrapiUser()
+    const orderID = ref(null)
     const direction = ref(null)
     const name = ref(null)
     const email = ref(null)
@@ -33,6 +40,9 @@
     const payed = ref(null)
     const products = ref(null)
     const userData = ref(null)
+    if (token && orderIDstorage.value) {
+        recibe.value = await useRecibe(token, orderIDstorage.value)
+    }
     if(user.value) {
         const { data } = await useAsyncGql({
             operation: 'user',
@@ -40,7 +50,6 @@
         });
         userData.value = data.value.usersPermissionsUser.data.attributes
     }
-    console.log('userData', route.redirectedFrom)
     const mapFields = async () => {
         let counter = 1
         products.value = dataProducts.value.map(item => {
@@ -60,30 +69,32 @@
         }, 0)
     }
     const handleSaveInSTRAPI = async () => {
-        let payedLari = null
         mapFields()
+        orderID.value = orderIDstorage.value,
         direction.value = `${userData.value.company.data.attributes.street}, ${userData.value.company.data.attributes.city}, ${userData.value.company.data.attributes.postal}`,
         name.value = userData.value.username,
         email.value = userData.value.email,
         company.value = userData.value.company.data.attributes.name,
         date.value = new Date(),
-        payedLari = payed.value + ' ₾',
+        payed.value = payed.value + ' ₾',
         products.value
         const data = await useOrders(
+            orderID.value,
             direction.value,
             name.value,
             email.value,
             company.value,
             date.value,
-            payedLari,
+            payed.value,
             products.value
         )
         if(data.error) {
             error.value = true
         }
     }
-    if(dataProducts.value.length > 0) {
+    if(recibe.value && dataProducts.value.length > 0) {
         await handleSaveInSTRAPI()
         cart().handleEmptyCart()
+        orderIDstorage.value = ''
     }
 </script>

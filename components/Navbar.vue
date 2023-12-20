@@ -189,14 +189,6 @@
             menusIsSticky.value = false
         }
     }
-    // const userData = ref(null)
-    // if(user.value) {
-    //     const { data } = await useAsyncGql({
-    //         operation: 'user',
-    //         variables: { id: user.value.id }
-    //     });
-    //     console.log(data.value)
-    // }
 </script>
 <style scoped>
 a.router-link-exact-active {
