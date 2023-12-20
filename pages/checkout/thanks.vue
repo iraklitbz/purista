@@ -18,6 +18,7 @@
 
 <script setup>
     import { cart } from '~/store/cart'
+    const route = useRoute()
     const dataProducts = ref([])
     dataProducts.value = cart().cartProducts
     const { locale } = useI18n()
@@ -39,6 +40,7 @@
         });
         userData.value = data.value.usersPermissionsUser.data.attributes
     }
+    console.log('userData', route.redirectedFrom)
     const mapFields = async () => {
         let counter = 1
         products.value = dataProducts.value.map(item => {

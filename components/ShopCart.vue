@@ -41,12 +41,12 @@
                   
                           Vaciar cesta
                       </button>
-                      <nuxt-link
-                          :to="localePath('/checkout', locale)"
+                      <a
+                          :href="localePath('/checkout', locale)"
                           class="btn btn--primary w-full text-white hover:text-primary transition-colors ease-in duration-200 py-2 border-l border-r border-gray-800 text-center"
                       >
                           Checkout &rarr;
-                      </nuxt-link>
+                      </a>
                     </div>
                 </div>
               </div>

@@ -108,26 +108,27 @@
                     Login
                 </nuxt-link>
             </div>
-           
+           <ClientOnly>
             <div>
-                <CartReview />
-                <div
-                    v-if="dataProducts.length > 0"
-                >
-                        <button
-                            class="mt-7 first-line:button button--aylen px-5 py-3 w-full bg-primary hover:bg-primary-light hover:text-white relative block focus:outline-none border-2 text-white border-solid rounded-lg text-xl text-center font-semibold tracking-widest overflow-hidden" 
-                            @click="handleBuy(event)"
-                        >
-                            Buy
-                        </button>
-                        <p
-                            v-if="error"
-                            class="mt-4 text-lg text-red-500 text-center"
-                        >
-                            Error, please try again
-                        </p>
+                    <CartReview />
+                    <div
+                        v-if="dataProducts.length > 0"
+                    >
+                            <button
+                                class="mt-7 first-line:button button--aylen px-5 py-3 w-full bg-primary hover:bg-primary-light hover:text-white relative block focus:outline-none border-2 text-white border-solid rounded-lg text-xl text-center font-semibold tracking-widest overflow-hidden" 
+                                @click="handleBuy(event)"
+                            >
+                                Buy
+                            </button>
+                            <p
+                                v-if="error"
+                                class="mt-4 text-lg text-red-500 text-center"
+                            >
+                                Error, please try again
+                            </p>
+                    </div>
                 </div>
-            </div>
+            </ClientOnly>
         </div>
     </section>
 </template>
@@ -171,6 +172,7 @@
             }
         })
         const handleGeneratePayLink = await useSendOrder(token, totalPrice.value, basket)
+        console.log(handleGeneratePayLink)
         if(handleGeneratePayLink && handleGeneratePayLink._links && handleGeneratePayLink._links.redirect.href) {
            navigateTo(handleGeneratePayLink._links.redirect.href, {
                 external: true,
