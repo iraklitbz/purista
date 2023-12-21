@@ -92,7 +92,5 @@
         await handleSaveInSTRAPI()
         cart().handleEmptyCart()
         orderIDstorage.value = ''
-    } else {
-        navigateTo(localePath('/checkout/fail', locale))
     }
 </script>
