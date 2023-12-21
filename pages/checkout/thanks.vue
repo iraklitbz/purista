@@ -51,18 +51,14 @@
         userData.value = data.value.usersPermissionsUser.data.attributes
     }
     const mapFields = async () => {
-        let counter = 1
         products.value = dataProducts.value.map(item => {
-        const key = `product${counter++}`;
         return {
-            [key]: {
                 id: item.id,
                 title: item.attributes.title,
                 price: item.attributes.price,
                 quantity: item.quantity,
-            },
-        };
-        }).reduce((acc, obj) => Object.assign(acc, obj), {});
+            };
+        })
         // totaly value
         payed.value = dataProducts.value.reduce((total, product) => {
             return total + product.attributes.price * product.quantity;
@@ -96,5 +92,7 @@
         await handleSaveInSTRAPI()
         cart().handleEmptyCart()
         orderIDstorage.value = ''
+    } else {
+        navigateTo(localePath('/checkout/fail', locale))
     }
 </script>

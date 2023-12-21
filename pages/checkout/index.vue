@@ -176,7 +176,6 @@
         const handleGeneratePayLink = await useSendOrder(token, totalPrice.value, basket)
         if(handleGeneratePayLink && handleGeneratePayLink._links && handleGeneratePayLink._links.redirect.href) {
             orderIDstorage.value = handleGeneratePayLink.id
-            console.log(handleGeneratePayLink.id)
             navigateTo(handleGeneratePayLink._links.redirect.href, {
                     external: true,
                     open: {
