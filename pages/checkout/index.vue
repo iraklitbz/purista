@@ -115,10 +115,15 @@
                         v-if="dataProducts.length > 0"
                     >
                             <button
-                                class="mt-7 first-line:button button--aylen px-5 py-3 w-full bg-primary hover:bg-primary-light hover:text-white relative block focus:outline-none border-2 text-white border-solid rounded-lg text-xl text-center font-semibold tracking-widest overflow-hidden" 
+                                class="mt-7 first-line:button button--aylen flex h-[56px] items-center justify-center px-5 py-3 w-full bg-primary hover:bg-primary-light hover:text-white relative focus:outline-none border-2 text-white border-solid rounded-lg text-xl text-center font-semibold tracking-widest overflow-hidden" 
                                 @click="handleBuy(event)"
                             >
-                                Buy
+                                <span
+                                    v-if="!loading"
+                                >
+                                    Buy
+                                </span>
+                                <div v-else class="dot-elastic"></div>
                             </button>
                             <p
                                 v-if="error"
@@ -137,6 +142,7 @@
     import { cart } from '~/store/cart'
     import { useTokenStore } from '~/store/token'
     const user = useStrapiUser()
+    const loading = ref(false)
     const orderIDstorage = useStorage('orderID')
     const tokenStore = useTokenStore()
     const dataProducts = ref([])
@@ -165,6 +171,7 @@
         }, 0).toFixed(2);
     });
     const handleBuy = async () => {
+        loading.value = true
         error.value = false
         const basket = dataProducts.value.map(item => {
             return {
@@ -175,6 +182,7 @@
         })
         const handleGeneratePayLink = await useSendOrder(token, totalPrice.value, basket)
         if(handleGeneratePayLink && handleGeneratePayLink._links && handleGeneratePayLink._links.redirect.href) {
+            loading.value = false
             orderIDstorage.value = handleGeneratePayLink.id
             navigateTo(handleGeneratePayLink._links.redirect.href, {
                     external: true,
@@ -187,3 +195,90 @@
         }
     }
 </script>
+<style scoped>
+ .dot-elastic {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #fff;
+    animation: dot-elastic 1s infinite linear;
+    }
+    .dot-elastic::before, .dot-elastic::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    }
+    .dot-elastic::before {
+    left: -15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #fff;
+    animation: dot-elastic-before 1s infinite linear;
+    }
+    .dot-elastic::after {
+    left: 15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #fff;
+    animation: dot-elastic-after 1s infinite linear;
+    }
+
+    @keyframes dot-elastic-before {
+    0% {
+        transform: scale(1, 1);
+    }
+    25% {
+        transform: scale(1, 1.5);
+    }
+    50% {
+        transform: scale(1, 0.67);
+    }
+    75% {
+        transform: scale(1, 1);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+    }
+    @keyframes dot-elastic {
+    0% {
+        transform: scale(1, 1);
+    }
+    25% {
+        transform: scale(1, 1);
+    }
+    50% {
+        transform: scale(1, 1.5);
+    }
+    75% {
+        transform: scale(1, 1);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+    }
+    @keyframes dot-elastic-after {
+    0% {
+        transform: scale(1, 1);
+    }
+    25% {
+        transform: scale(1, 1);
+    }
+    50% {
+        transform: scale(1, 0.67);
+    }
+    75% {
+        transform: scale(1, 1.5);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+    }
+</style>
