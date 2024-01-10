@@ -7,14 +7,14 @@
         </div>
          <ul class="flex justify-center">
             <li class="text-center mr-2">
-                <a target="_blank" href="https://www.facebook.com/profile.php?id=100064998761253">
+                <a target="_blank" href="https://www.facebook.com/people/Purista-%E1%83%9E%E1%83%A3%E1%83%A0%E1%83%98%E1%83%A1%E1%83%A2%E1%83%90/100064998761253/">
                 <nuxt-icon
                     name="facebook"
                     class="icon icon-fill text-3xl text-primary hover:text-white transition-colors ease-in duration-200 relative"
                 />
             </a></li>
             <li class="text-center">
-                <a target="_blank" href="https://www.instagram.com/purista.ge/">
+                <a target="_blank" href="https://www.instagram.com/puristabakery/">
                 <nuxt-icon
                     name="instagram"
                     class="icon icon-fill text-3xl text-primary hover:text-white transition-colors ease-in duration-200"

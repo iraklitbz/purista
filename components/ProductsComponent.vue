@@ -31,12 +31,6 @@
                     </nuxt-link>
                 </h2>
 
-            <div class="my-1 lg:my-1.5">
-                <span class="prod-card-v2__price text-primary text-xl">
-                    {{item.attributes.price}} ₾
-                </span>
-            </div>
-
             </div>
         </div>
     </div>

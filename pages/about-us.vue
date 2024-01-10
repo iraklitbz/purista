@@ -5,7 +5,6 @@
           <div class="grid grid-flow-col auto-cols-[minmax(0,_2fr)] gap-2 md:gap-10">
               <img class="w-full mx-auto rounded-xl" src="https://res.cloudinary.com/dhaznxmws/image/upload/v1700167301/assets/7_mc6svi.jpg" />
               <img class="w-full mx-auto rounded-xl" src="https://res.cloudinary.com/dhaznxmws/image/upload/v1700167304/assets/8_wc4lmm.jpg" />
-              <img class="w-full mx-auto rounded-xl" src="https://res.cloudinary.com/dhaznxmws/image/upload/v1700167302/assets/9_qggwku.jpg" />
           </div>
         </div>
         <div class="max-w-4xl mx-auto py-10 px-5">
