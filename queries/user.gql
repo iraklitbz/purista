@@ -11,6 +11,7 @@ query user($id: ID) {
               street
               city
               postal
+              discount
             }
           }
         }

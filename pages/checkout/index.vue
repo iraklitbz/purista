@@ -110,7 +110,9 @@
             </div>
            <ClientOnly>
             <div>
-                    <CartReview />
+                    <CartReview 
+                        :price-discount="discountPercent"
+                    />
                     <div
                         v-if="dataProducts.length > 0"
                     >
@@ -148,6 +150,7 @@
     const dataProducts = ref([])
     const error = ref(false)
     dataProducts.value = cart().cartProducts
+    const discountPercent = ref(0)
     //CART
     const { handleGetToken, token } = tokenStore
     handleGetToken()
@@ -160,6 +163,9 @@
             variables: { id: user.value.id }
         });
         userData.value = data.value.usersPermissionsUser.data.attributes
+        if(data.value.usersPermissionsUser.data.attributes.company.data.attributes.discount !== null) {
+            discountPercent.value = data.value.usersPermissionsUser.data.attributes.company.data.attributes.discount
+        }
     }
     onMounted(() => {
         cart().handleCloseMenu()
@@ -170,6 +176,12 @@
             return total + productTotal;
         }, 0).toFixed(2);
     });
+    const finalPrice = computed(() => {
+        if(discountPercent.value > 0) {
+            return (totalPrice.value - (totalPrice.value * (discountPercent.value / 100))).toFixed(2)
+        }
+        return totalPrice.value
+    })
     const handleBuy = async () => {
         loading.value = true
         error.value = false
@@ -180,7 +192,7 @@
                 unit_price: item.attributes.price
             }
         })
-        const handleGeneratePayLink = await useSendOrder(token, totalPrice.value, basket)
+        const handleGeneratePayLink = await useSendOrder(token, finalPrice.value, basket)
         if(handleGeneratePayLink && handleGeneratePayLink._links && handleGeneratePayLink._links.redirect.href) {
             loading.value = false
             orderIDstorage.value = handleGeneratePayLink.id

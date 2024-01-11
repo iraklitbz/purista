@@ -23,10 +23,22 @@
                     Tu cesta está vacía
                 </p>
             </div>
+            <span
+                v-if="priceDiscount"
+                class="text-md text-right block text-green-900"
+            >
+                You have a <b>discount</b> of {{ priceDiscount }}%
+            </span>
             <p class="lg:text-xl text-primary-darker text-right text-lg bg-primary-lighter p-2 rounded-lg">
                 <span class="mr-2">Total:</span> 
-                <span>
+                <span
+                    v-if="priceDiscount"
+                    class="line-through mr-2 text-[15px]"
+                >
                     {{ totalPrice }} ₾
+                </span>
+                <span>
+                    {{ handlePriceDiscount(totalPrice) }} ₾
                 </span>
             </p>
         </ClientOnly>
@@ -35,6 +47,15 @@
 
 <script setup>
     import { cart } from '~/store/cart'
+    const props = defineProps({
+        priceDiscount: {
+            type: Number,
+            default: 0
+        }
+    })
+    const handlePriceDiscount = (price) => {
+        return (price - (price * props.priceDiscount / 100)).toFixed(2)
+    }
     const dataProducts = ref([])
     dataProducts.value = cart().cartProducts
     const totalPrice = computed(() => {

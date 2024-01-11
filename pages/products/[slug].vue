@@ -11,7 +11,7 @@
                               {{product.attributes.title}}
                             </h2>
                             <p class="text-lg mt-5 lg:text-2xl text-primary font-bold">
-                              {{product.attributes.price}} ₾
+                              {{handleDiscount(product.attributes.price)}} ₾
                             </p>
                         </div>
                     </div>
@@ -82,6 +82,22 @@ const handleBeforeToCart = (product) => {
     cart().addToCart({ ...product, quantity: qty })
     handleAlertMenu(product.title)
 }
+const priceDiscount = ref(0)
+  if(user.value) {
+      const { data } = await useAsyncGql({
+          operation: 'user',
+          variables: { id: user.value.id }
+      });
+      if(data.value.usersPermissionsUser.data.attributes.company.data.attributes.discount !== null) {
+          priceDiscount.value = data.value.usersPermissionsUser.data.attributes.company.data.attributes.discount
+      }
+  }
+  const handleDiscount = (price) => {
+      if(priceDiscount.value > 0) {
+          return (price - (price * (priceDiscount.value / 100))).toFixed(2)
+      }
+      return price
+  }
 </script>
 <style scope>
   .list li {
